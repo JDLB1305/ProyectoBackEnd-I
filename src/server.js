@@ -1,5 +1,11 @@
 import http from 'http'
 import express from 'express'
+import crypto from 'crypto'
+import { __dirname } from './path.js'
+import productRouter from './routes/productos.js'
+import cartRouter from './routes/carritos.routes.js'
+import multerRouter from './routes/imagenes.routes.js'
+
 
 /* const PORT = 3000
 
@@ -11,10 +17,22 @@ server.listen(PORT, ()=> {
     console.log(`Server on port ${PORT}`)
 }) */
 
+// ---- Server Local - Peticiones
+
 const app = express()
 const PORT = 8080
 
-app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use('/static', express.static(__dirname + '/public'))
+
+app.use('/api/productos', productRouter)
+app.use('/api/carts', cartRouter)
+app.use('/upload', multerRouter)
+
+
+
+/*app.use(express.urlencoded({extended:true}))
 
 const personas = [
     {
@@ -52,8 +70,8 @@ app.get('/personas/:idPersona', (req,res) => { //: indican que va a ser dinamico
     const idPersona = req.params.idPersona
     const persona = personas.find(persona => persona.id == parseInt(idPersona))
     res.send(persona)
-})
+}) */
 
 app.listen(PORT, () => {
     console.log(`Server on port ${PORT}`)
-})
+}) 
