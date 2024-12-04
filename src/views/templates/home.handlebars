@@ -1,3 +1,25 @@
-{{!comentario}}
-
 <p>hoka mamañemas!: {{message}}</p>
+
+<h1 class="text-center my-4 text-success">Lista de productos</h1>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" style="padding: 30px;" >
+    {{#each productos}}
+        {{#if status}}
+        <div class="col">
+            <div class="card h-100 shadow-sm" style="background-color: #f0f9ff; border-color: #bae6fd;">
+                <div class="card-body">
+                    <h5 class="card-title text-info fw-bold">{{name}}</h5>
+                    <p class="card-text"><strong>Description:</strong> {{description}}</p>
+                    <p class="card-text"><strong>Code:</strong> {{code}}</p>
+                    <p class="card-text"><strong>Category:</strong> {{category}}</p>
+                    <p class="card-text"><strong>Price:</strong> ${{price}}</p>
+                    <p class="card-text"><strong>Stock:</strong> {{stock}}</p>
+                </div>
+                <div class="card-footer bg-white text-center">
+                    <button type="button" class="btn btn-info w-100 text-white">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    {{/each}}
+</div>
