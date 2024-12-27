@@ -33,9 +33,14 @@ const server = app.listen(PORT, () => {
     console.log(`Server on port ${PORT}`)
 }) 
 
-await mongoose.connect("mongodb+srv://jdlb1305:Estabilisador12345@cluster0.cmr32.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+const mongoURI = "mongodb+srv://jdlb1305:Estabilisador12345@cluster0.cmr32.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+await mongoose.connect(mongoURI, {
+    tls: true, // Habilita TLS/SSL
+    tlsAllowInvalidCertificates: true, // Permite certificados inválidos
+})
 .then(() => console.log("BD conectada"))
-.catch((e) => console.log("Error al conectar con bdd: ", e))
+.catch((e) => console.log("Error al conectar con bdd: ", e));
 
 
 const io = new Server (server)
