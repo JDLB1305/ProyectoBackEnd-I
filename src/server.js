@@ -1,5 +1,6 @@
 import http from 'http'
 import express from 'express'
+import mongoose from 'mongoose'
 import { create } from 'express-handlebars'
 import { Server } from 'socket.io'
 import path from 'path'
@@ -31,6 +32,11 @@ const PORT = 8080
 const server = app.listen(PORT, () => {
     console.log(`Server on port ${PORT}`)
 }) 
+
+await mongoose.connect("mongodb+srv://jdlb1305:Estabilisador12345@cluster0.cmr32.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+.then(() => console.log("BD conectada"))
+.catch((e) => console.log("Error al conectar con bdd: ", e))
+
 
 const io = new Server (server)
 
@@ -73,7 +79,7 @@ io.on('connection', (socket) => { //Cuando se producza el "apreton de manos", pu
     //Detectar desconexion
     socket.on('disconnect', ()=> {
         console.log('Usuario desconectado: ', socket.id);
-        
+    
     })
 })
 
